@@ -1,5 +1,19 @@
-<h2><%= @library.name %></h2>
-<p><%= @library.university %></p>
-<p><%= @library.location %></p>
-<p><%= @library.max_days %></p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @library.name %>
+  <%= @library.university %>
+  <%= @library.location %>
+  <%= @library.max_days %>
+</p>
+
+
+<%= link_to 'Edit', edit_library_path(@library) %> |
+<%= link_to 'Back', library_path %>
+
+<!--<h2><%#= @library.name %></h2>-->
+<!--<p><%#= @library.university %></p>-->
+<!--<p><%#= @library.location %></p>-->
+<!--<p><%#= @library.max_days %></p>-->
 <!--<p><%#= @library.overdue_fines %></p>-->
