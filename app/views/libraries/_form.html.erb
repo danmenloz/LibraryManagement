@@ -1,0 +1,27 @@
+<%= form_for :library, url: libraries_path do |f| %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :university %><br />
+    <%= f.text_field :university %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Location (On Campus)" %><br />
+    <%= f.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Maximum number of days a book can be borrowed" %><br />
+    <%= f.number_field :max_days %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
