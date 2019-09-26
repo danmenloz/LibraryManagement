@@ -1,0 +1,28 @@
+<h1>Listing librarians</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Library</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% if !@librarians.nil? then @librarians.each do |librarian| %>
+  <tr>
+    <td><%= librarian.name %></td>
+    <td><%= librarian.email %></td>
+    <td><%= librarian.library.name %></td>
+    <td><%= link_to 'Show', librarian %></td>
+    <td><%= link_to 'Edit', edit_librarian_path(librarian) %></td>
+    <td><%= link_to 'Destroy', librarian, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Librarian', new_librarian_path %>

@@ -1,0 +1,47 @@
+<%= form_for @student do |form| %>
+  <% if student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %><br />
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %><br />
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %><br />
+    <%= form.text_field :password %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :ed_level %>
+    <%= select("student", "ed_level", ["Undergraduate", "Masters", "Doctoral"]) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :university %><br />
+    <%= form.text_field :university %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :max_books %><br />
+    <%= form.text_field :max_books %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
