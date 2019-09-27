@@ -236,8 +236,6 @@ Your submission in Expertiza should consist of the following-
 Do we need to excrypt sensitive data?
 * A book is part of a library. Few attributes like max no of days a book can be borrowed or the overdue fines apply to all the books in a library. Encryption - Upto you.
 
-24. What does the University attribute of Student do? Can student edit this attribute? 
-* A student can borrow books from the libraries associated with the University they are enrolled in. No, this field cannot be edited once set.
 
 
 
