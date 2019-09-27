@@ -1,2 +1,42 @@
-<h1>Listing Books</h1>
-<p><%= @title %></p>
+<h2>Listing Books</h2>
+
+<table>
+  <tr>
+    <th>ISBN</th>
+    <th>Title</th>
+    <th>Author(s)</th>
+    <th>Language</th>
+    <th>Published</th>
+    <th>Edition</th>
+    <th>Cover</th>
+    <th>Subject</th>
+    <th>Summary</th>
+    <th>Special Collection</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% if !@books.nil? then @books.each do |book| %>
+      <tr>
+        <td><%= book.isbn %></td>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.language%></td>
+        <td><%= book.published%></td>
+        <td><%= book.edition%></td>
+        <td><%= book.cover%></td>
+        <td><%= book.subject%></td>
+        <td><%= book.summary%></td>
+        <td><%= book.special%></td>
+        <td><%= link_to 'Show', book %></td>
+        <td><%= link_to 'Edit', edit_book_path(book) %></td>
+        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Book', new_book_path %>
