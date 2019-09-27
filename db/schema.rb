@@ -30,11 +30,16 @@ ActiveRecord::Schema.define(version: 2019_09_27_035342) do
   create_table "libraries", force: :cascade do |t|
     t.string "name"
     t.string "university"
+    t.string "location"
     t.integer "max_days"
     t.integer "overdue_fines"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "location"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
