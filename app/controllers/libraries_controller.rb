@@ -13,8 +13,8 @@ class LibrariesController < ApplicationController
     end
   end
 
-  # GET /categories/1
-  # GET /categories/1.json
+  # GET /libraries/1
+  # GET /libraries/1.json
   def show
     @library = Library.find(params[:id])
 
@@ -24,8 +24,8 @@ class LibrariesController < ApplicationController
     end
   end
 
-  # GET /categories/new
-  # GET /categories/new.json
+  # GET /libraries/new
+  # GET /libraries/new.json
   def new
     @library = Library.new
 
@@ -35,13 +35,13 @@ class LibrariesController < ApplicationController
     end
   end
 
-  # GET /categories/1/edit
+  # GET /libraries/1/edit
   def edit
     @library = Library.find(params[:id])
   end
 
-  # POST /categories
-  # POST /categories.json
+  # POST /libraries
+  # POST /libraries.json
   def create
     # render plain: params[:library].inspect
     @library = Library.new(library_params)
@@ -61,8 +61,8 @@ class LibrariesController < ApplicationController
     end
   end
 
-  # PUT /categories/1
-  # PUT /categories/1.json
+  # PUT /libraries/1
+  # PUT /libraries/1.json
   def update
     @library = Library.find(params[:id])
 
@@ -77,8 +77,8 @@ class LibrariesController < ApplicationController
     end
   end
 
-  # DELETE /categories/1
-  # DELETE /categories/1.json
+  # DELETE /libraries/1
+  # DELETE /libraries/1.json
   def destroy
     @library = Library.find(params[:id])
     @library.destroy
