@@ -11,46 +11,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %><br />
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %><br />
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password %><br />
-    <%= form.text_field :password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :type %><br />
-    <%= select("user", "type", ["librarian", "student"]) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :library_id %><br />
-    <%= select("user", "library_id", Library.all.collect{ |l| [ l.name, l.id ] }) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :ed_level %><br />
-    <%= select("student", "ed_level", ["Undergraduate", "Masters", "Doctoral"]) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :university %><br />
-    <%= form.text_field :university %>
-  </div>
   
-  <div class="field">
-    <%= form.label :max_books %><br />
-    <%= form.text_field :max_books %>
-  </div>
+  <%= form.label :name %>
+  <%= form.text_field :name %><br /><br />
+  
+  <%= form.label :email %>
+  <%= form.text_field :email %><br /><br />
+  
+  <%= form.label :password %>
+  <%= form.password_field :password %><br /><br />
+  
+  <%= form.label :level %>
+  <%= select("user", "level", ['', 'librarian', 'student']) %><br /><br />
 
+  <%= form.label :library_id %>
+  <%= select("user", "library_id", Library.all.collect{ |l| [ l.name, l.id ] }) %><br /><br />
+  
+  <%= form.label :ed_level %>
+  <%= select("user", "ed_level", ["Undergraduate", "Masters", "Doctoral"]) %><br /><br />
+  
+  <%= form.label :university %>
+  <%= form.text_field :university %><br /><br />
+  
+  <%= form.label :max_books %>
+  <%= form.text_field :max_books %><br /><br />
+  
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(version: 2019_09_28_205100) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "level"
+    t.string "email"
+    t.string "name"
+    t.string "password_digest"
+    t.string "ed_level"
+    t.string "university"
+    t.integer "max_books"
+    t.integer "library_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
