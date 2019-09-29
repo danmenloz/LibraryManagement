@@ -2,7 +2,9 @@ class BooksController < ApplicationController
 
 
   def book_params
-    params.require(:book).permit(:isbn, :title, :author, :language, :published, :edition, :cover, :subject, :summary, :special)
+    params.require(:book).permit(:isbn, :title, :author, :language,
+                                 :published, :edition, :cover, :subject,
+                                 :summary, :special, :copies, :library_id)
   end
 
   def index
@@ -14,8 +16,8 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET /categories/1
-  # GET /categories/1.json
+  # GET /books/1
+  # GET /books/1.json
   def show
     @book = Book.find(params[:id])
 
@@ -25,8 +27,8 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET /categories/new
-  # GET /categories/new.json
+  # GET /books/new
+  # GET /books/new.json
   def new
     @book = Book.new
 
@@ -36,13 +38,13 @@ class BooksController < ApplicationController
     end
   end
 
-  # GET /categories/1/edit
+  # GET /books/1/edit
   def edit
     @book = Book.find(params[:id])
   end
 
-  # POST /categories
-  # POST /categories.json
+  # POST /books
+  # POST /books.json
   def create
     @book = Book.new(book_params)
 
@@ -58,8 +60,8 @@ class BooksController < ApplicationController
     end
   end
 
-  # PUT /categories/1
-  # PUT /categories/1.json
+  # PUT /books/1
+  # PUT /books/1.json
   def update
     @book = Book.find(params[:id])
 
@@ -74,8 +76,8 @@ class BooksController < ApplicationController
     end
   end
 
-  # DELETE /categories/1
-  # DELETE /categories/1.json
+  # DELETE /books/1
+  # DELETE /books/1.json
   def destroy
     @book = Book.find(params[:id])
     @book.destroy

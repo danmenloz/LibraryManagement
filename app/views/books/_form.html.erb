@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label "Library" %><br />
+    <%= select("book", "library_id", Library.all.collect{ |lib| [ (lib.name+'@'+lib.university), lib.id ] }) %>
+  </div>
+
+  <div class="field">
     <%= f.label "ISBN" %><br />
     <%= f.text_field :isbn %>
   </div>
@@ -43,7 +48,7 @@
 
   <div class="field">
     <%= f.label :cover %><br />
-    <%= f.text_field :cover %>
+    <%= f.file_field :cover %>
   </div>
 
   <div class="field">
@@ -58,7 +63,12 @@
 
   <div class="field">
     <%= f.label "Special Collection?" %><br />
-    <%= check_box_tag(:special, :special)  %>
+    <%= f.check_box :special  %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Number of copies" %><br />
+    <%= f.number_field :copies %>
   </div>
 
   <div class="actions">

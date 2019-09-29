@@ -32,7 +32,8 @@
 
 <p>
   <b>Cover file:</b>
-  <%= @book.cover %>
+  <%#= @book.cover %>
+  <%= image_tag(@book.cover) %>
 </p>
 
 <p>
@@ -49,8 +50,6 @@
   <b>Special Collection?:</b>
   <%= @book.special %>
 </p>
-
-
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_url %>

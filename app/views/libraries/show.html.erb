@@ -3,14 +3,26 @@
 <p>
   <b>Name:</b>
   <%= @library.name %>
+</p>
+<p>
+  <b>University: </b>
   <%= @library.university %>
+</p>
+<p>
+  <b>Location: </b>
   <%= @library.location %>
+</p>
+<p>
+  <b>Maximum days to borrow: </b>
   <%= @library.max_days %>
 </p>
-
+<p>
+  <b>Overdue fines: </b>
+  <%= @library.overdue_fines %>
+</p>
 
 <%= link_to 'Edit', edit_library_path(@library) %> |
-<%= link_to 'Back', library_path %>
+<%= link_to 'Back', libraries_path %>
 
 <!--<h2><%#= @library.name %></h2>-->
 <!--<p><%#= @library.university %></p>-->

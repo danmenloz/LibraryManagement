@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Name</th>
-    <th></th>
+    <th>University</th>
     <th></th>
     <th></th>
   </tr>
@@ -11,6 +11,7 @@
 <% @libraries.each do |library| %>
   <tr>
     <td><%= library.name %></td>
+    <td><%= library.university %></td>
     <td><%= link_to 'Show', library %></td>
     <td><%= link_to 'Edit', edit_library_path(library) %></td>
     <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>

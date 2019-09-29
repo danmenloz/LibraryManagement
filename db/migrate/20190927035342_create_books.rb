@@ -11,7 +11,9 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.string :subject
       t.text :summary
       t.boolean :special
+      t.integer :copies
 
+      t.references :library
       t.timestamps
     end
   end
