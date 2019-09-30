@@ -2,10 +2,10 @@ class User < ApplicationRecord
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   has_many :hold_requests, dependent: :destroy
-  belongs_to :library
+  #belongs_to :library
 
   validates :level, presence: true, inclusion: { in: ["admin", "librarian", "student"] }
-  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX}
+  validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
   validates :name, presence: true, length: { maximum: 100 }
   
   has_secure_password

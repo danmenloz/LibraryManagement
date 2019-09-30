@@ -25,7 +25,7 @@
   <%= select("user", "level", ['', 'librarian', 'student']) %><br /><br />
 
   <%= form.label :library_id %>
-  <%= select("user", "library_id", Library.all.collect{ |l| [ l.name, l.id ] }) %><br /><br />
+  <%= select("user", "library_id", [""] + Library.all.collect{ |l| [ l.name, l.id ] }) %><br /><br />
   
   <%= form.label :ed_level %>
   <%= select("user", "ed_level", ["Undergraduate", "Masters", "Doctoral"]) %><br /><br />
