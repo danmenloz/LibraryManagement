@@ -25,10 +25,10 @@
   <%= @user.max_books %>
 </p>
 <p>
-  <%= if @user.level == "librarian" %>
+  <% if @user.level == "librarian" %>
   <b>Library:</b>
   <%= Library.find(@user.library_id).name %>
-  <%= end %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
