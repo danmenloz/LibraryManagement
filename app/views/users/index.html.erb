@@ -25,7 +25,7 @@
         <td><%= user.ed_level %></td>
         <td><%= user.university %></td>
         <td><%= user.max_books %></td>
-        <% if @user.level == "librarian" %>
+        <% if user.level == "librarian" %>
         <td><%= Library.find(user.library_id).name %></td>
         <% else %>
         <td></td>
