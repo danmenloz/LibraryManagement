@@ -28,10 +28,10 @@
   <%= select("user", "library_id", [""] + Library.all.collect{ |l| [ l.name, l.id ] }) %><br /><br />
   
   <%= form.label :ed_level %>
-  <%= select("user", "ed_level", ["Undergraduate", "Masters", "Doctoral"]) %><br /><br />
+  <%= select("user", "ed_level", ["", "Undergraduate", "Masters", "Doctoral"]) %><br /><br />
   
   <%= form.label :university %>
-  <%= form.text_field :university %><br /><br />
+  <%= select("user", "university", [""] + Library.all.collect{ |l| [ l.name, l.university ] }) %><br /><br />
   
   <%= form.label :max_books %>
   <%= form.text_field :max_books %><br /><br />
