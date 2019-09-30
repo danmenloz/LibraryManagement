@@ -52,9 +52,9 @@
 </p>
 <p>
   <b>Availability</b>
-  <%if @book.copies > 0 %>Available
-    <%else %>Not available
+  <%=@book.copies %>
 </p>
 
+
 <%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_url %>
+<%= link_to 'Back', books_url() %>
