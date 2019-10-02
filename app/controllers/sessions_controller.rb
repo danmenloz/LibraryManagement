@@ -15,8 +15,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to 'Show', notice: "Logged in!"
     else
-      notice: "Email or password is invalid"
-      render "new"
+      render "new", notice: "Email or password is invalid"
     end
   end
 
