@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @current_user }
+      format.json { render json: :current_user }
     end
   end
 
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to home_url, notice: "Logged in!"
+      redirect_to session, notice: "Logged in!"
     else
       render "new", notice: "Email or password is invalid"
     end
