@@ -5,14 +5,14 @@ class SessionsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: :current_user }
+      format.json { render json: @current_user }
     end
   end
 
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+      @current_user = user
       redirect_to :home, notice: "Logged in!"
     else
       render "new", notice: "Email or password is invalid"
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    @current_user = nil
     redirect_to root_url, notice: "Logged out!"
   end
 end
