@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :sessions
 
   root 'sessions#new'
+  home 'sessions#show'
 
   # Normal route
   # get 'books' => 'books#index'
