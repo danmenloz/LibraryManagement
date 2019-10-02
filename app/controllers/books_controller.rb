@@ -8,8 +8,8 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
-
+   # @books = Book.search(params[:search])
+    @books = Book.where(["title LIKE?", "%#{params[:search]}%"])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @books }
@@ -87,5 +87,8 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
 
 end
