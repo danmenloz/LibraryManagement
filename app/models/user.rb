@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
-  has_many :hold_requests, dependent: :destroy
+  #has_many :hold_requests, dependent: :destroy
   #belongs_to :library
 
   validates :level, presence: true, inclusion: { in: ["admin", "librarian", "student"] }
