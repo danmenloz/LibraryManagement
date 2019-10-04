@@ -5,8 +5,11 @@
 * Submission due date : September 30, 2019 (Monday) 11:59 PM
 * Resubmission due date : October 9, 2019 (Wednesday) 11:59 PM
 
-# Library Management 
+# Links
 
 [Requirements Review](https://docs.google.com/document/d/1A2-CUS2L1p53WVMInx_t4NSveBCi9HOzMBihZ65bKI8/edit?usp=sharing)
 
 [Heroku Link](https://lit-atoll-42842.herokuapp.com/)
+
+# Instructions
+* The admin credentials: admaycoc@ncsu.edu  12345678
