@@ -8,6 +8,8 @@ class Book < ActiveRecord::Base
   validates :edition, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :copies, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   def self.search(search)
-    where("title LIKE ?", "%#{search}%")
+    if search
+      where('title LIKE ?', "%#{search}%") || where('isbn LIKE ?', "%#{search}%")
+    end
   end
 end
