@@ -8,8 +8,17 @@ class BooksController < ApplicationController
   end
 
   def index
-   # @books = Book.search(params[:search])
-    @books = Book.where(["title LIKE?", "%#{params[:search]}%"])
+
+    @books = if (params[:search_title] || params[:search_author] || params[:search_subject] || params[:search_published] )
+               if (params[:search_published]=="")
+                 Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ?', "%#{params[:search_title].downcase}%","%#{params[:search_author].downcase}%","%#{params[:search_subject].downcase}%")
+               elsif (params[:search_published]!="")
+                 Book.where(:published =>  params[:search_published])
+               end
+             else
+               Book.all
+             end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @books }
