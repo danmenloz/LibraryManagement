@@ -8,10 +8,16 @@ class BooksController < ApplicationController
   end
 
   def index
+<<<<<<< HEAD
 
     @books =  Book.search(params[:search])
     #@books = Book.where("isbn LIKE ?", "%#{params[:isbn]}%")
 
+=======
+    # @books = Book.all
+    @books = Book.where("title LIKE ?", "%#{params[:search]}%")
+    
+>>>>>>> fe7bf1f59bab8ed5235d3fd4cce1ce97a400eea2
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @books }
