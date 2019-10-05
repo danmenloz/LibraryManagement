@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to :home, notice: "Logged in as: " + user.name
+      redirect_to :home, notice: "Welcome " + user.name + "!"
     else
       render "new", notice: "Email or password is invalid"
     end

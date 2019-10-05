@@ -1,7 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Dashboard for: </b><%= current_user.name %>
-
-
+  <b> <%= current_user.level %> Dashboard</b> <br> <br>
 </p>
+
+<body>
+  <%= link_to "Libraries", libraries_path %> <br>
+  <%= link_to "Students", :students %> <br>
+  <%= link_to "Librarians", :librarians %> <br>
+  <%= link_to "Books", books_path %> <br>
+  <%= link_to "Hold Requests", hold_requests_path %> <br>
+</body>
+

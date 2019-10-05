@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Listing </h2>
+<h2>Listing Students</h2>
 
 <table>
   <tr>
@@ -10,7 +10,6 @@
     <th>Ed Level</th>
     <th>University</th>
     <th>Max Books</th>
-    <th>Library</th>
     <th></th>
     <th></th>
     <th></th>
@@ -25,11 +24,6 @@
         <td><%= user.ed_level %></td>
         <td><%= user.university %></td>
         <td><%= user.max_books %></td>
-        <% if user.level == "librarian" %>
-        <td><%= Library.find(user.library_id).name %></td>
-        <% else %>
-        <td></td>
-        <% end %>
         <td><%= link_to 'Details', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

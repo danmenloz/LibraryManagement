@@ -13,30 +13,32 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "*Library Name" %><br />
+    <%= f.label "Library Name" %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label "*University" %><br />
+    <%= f.label "University" %>
     <%= f.text_field :university %>
     <%#= select("university", "university_id", User.all.collect{ |l| [ l.university, l.id ] }) %>
   </div>
 
   <div class="field">
-    <%= f.label "*Location (On Campus)" %><br />
+    <%= f.label "Location (On Campus)" %>
     <%= f.text_field :location %>
   </div>
 
   <div class="field">
-    <%= f.label "*Maximum number of days a book can be borrowed" %><br />
+    <%= f.label "Maximum number of days a book can be borrowed" %>
     <%= f.number_field :max_days %>
   </div>
 
   <div>
-    <%= f.label "*Overdue fines ($/day)" %> <br />
+    <%= f.label "Overdue fines ($/day)" %>
     <%= f.number_field :overdue_fines, value: number_to_currency(f.object.overdue_fines.to_f, delimiter: '', unit: ''), step: 0.5 %>
   </div>
+
+  <br>
 
   <div class="actions">
     <%= f.submit %>
