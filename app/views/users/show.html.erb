@@ -27,9 +27,20 @@
 <p>
   <% if @user.level == "librarian" %>
   <b>Library:</b>
-  <%= Library.find(@user.library_id).name %>
+  <%= Library.get_lib(@user) %>
   <% end %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if @current_user.level == 'admin' %>
+  <% case @user.level
+    when 'student' %>
+    <%= link_to 'Back', users_path(:level => 'students') %>
+  <% when 'librarian' %>
+    <%= link_to 'Back', users_path(:level => 'librarians') %>
+  <% else %>
+    <%= link_to 'Back', :home%>
+  <% end %>
+<% else %>
+  <%= link_to 'Back', :home%>
+<% end %>

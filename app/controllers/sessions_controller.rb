@@ -3,6 +3,8 @@ class SessionsController < ApplicationController
   end
 
   def show
+    @current_user =  current_user # call helper method
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: :current_user }

@@ -1,4 +1,4 @@
-<h2>Listing Books</h2>
+ <h2>Listing All Books <br> <%= params %></h2>
 
 <%= form_tag books_path, :method => 'get'  do %>
   <%= text_field_tag :search, params[:search]%>
@@ -15,7 +15,7 @@
     <th>Edition</th>
     <th>Cover</th>
     <th>Subject</th>
-    <th>Summary</th>
+    <th>Library</th>
     <th>Special Collection</th>
     <th></th>
     <th></th>
@@ -24,19 +24,23 @@
 
   <% if !@books.nil? then @books.each do |book| %>
       <tr>
-        <td><%= book.isbn %></td>
-        <td><%= book.title %></td>
-        <td><%= book.author %></td>
-        <td><%= book.language%></td>
-        <td><%= book.published%></td>
-        <td><%= book.edition%></td>
-        <td><%= image_tag(book.cover) %></td>
-        <td><%= book.subject%></td>
-        <td><%= book.summary%></td>
-        <td><%= book.special%></td>
-        <td><%= link_to 'Details', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= book.isbn %></td>
+          <td><%= book.title %></td>
+          <td><%= book.author %></td>
+          <td><%= book.language%></td>
+          <td><%= book.published.strftime('%Y-%m-%d') %></td>
+          <td><%= book.edition%></td>
+          <td><%= image_tag(book.cover, height: '70', width: '50') %></td>
+          <td><%= book.subject%></td>
+          <td><%= book.library.name + '-' + book.library.university %></td>
+          <td><%= book.special%></td>
+        <%unless  current_user.level == 'student' %>
+          <td><%= link_to 'Details', book %></td>
+          <td><%= link_to 'Edit', edit_book_path(book) %></td>
+          <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%else if current_user.university == book.library.university %>
+          <%end %>
+        <% end %>
       </tr>
     <% end %>
   <% end %>

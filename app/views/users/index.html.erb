@@ -1,16 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Listing </h2>
+<h2>Listing  <%= params[:level] %></h2>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Email</th>
     <th>Level</th>
-    <th>Ed Level</th>
+    <% if params[:level] == 'students' %>
+      <th>Ed Level</th>
+      <th>Max Books</th>
+    <% end %>
     <th>University</th>
-    <th>Max Books</th>
-    <th>Library</th>
+    <% if params[:level] == 'librarians' %>
+      <th>Library</th>
+    <% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -18,21 +22,27 @@
 
   <tbody>
     <% @users.each do |user| %>
+    <% next if user.level == 'admin' %>
+    <% if params[:level] == 'students' %>
+      <% next if user.level == 'librarian' %>
+    <% else %>
+      <% next if user.level == 'student' %>
+    <% end %>
       <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.level %></td>
-        <td><%= user.ed_level %></td>
-        <td><%= user.university %></td>
-        <td><%= user.max_books %></td>
-        <% if user.level == "librarian" %>
-        <td><%= Library.find(user.library_id).name %></td>
-        <% else %>
-        <td></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.level %></td>
+        <% if params[:level] == 'students' %>
+          <td><%= user.ed_level %></td>
+          <td><%= user.max_books %></td>
         <% end %>
-        <td><%= link_to 'Details', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= user.university %></td>
+        <% if params[:level]  == "librarians" %>
+          <td><%= Library.get_lib(user) %></td>
+        <% end %>
+          <td><%= link_to 'Details', user %></td>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

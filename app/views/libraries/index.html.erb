@@ -4,22 +4,30 @@
   <tr>
     <th>Name</th>
     <th>University</th>
-    <th></th>
-    <th></th>
+    <th>Location</th>
+    <th>Borrow period (days)</th>
+    <th>Overdue fines ($/day)</th>
   </tr>
 
 <% @libraries.each do |library| %>
   <tr>
     <td><%= library.name %></td>
     <td><%= library.university %></td>
-    <td><%= link_to 'Details', library %></td>
-    <td><%= link_to 'Edit', edit_library_path(library) %></td>
-    <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= library.location %></td>
+    <td><%= library.max_days %></td>
+    <td><%= library.overdue_fines %></td>
+    <%unless  current_user.level == 'student' %>
+      <td><%= link_to 'Details', library %></td>
+      <td><%= link_to 'Edit', edit_library_path(library) %></td>
+      <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'This will delete all dependents too! Are you sure?' } %></td>
+    <% end %>
   </tr>
   <%end%>
 </table>
 
 <br />
 
-<%= link_to 'New Library', new_library_path%> |
+<%unless  current_user.level == 'student' %>
+  <%= link_to 'New Library', new_library_path%> |
+<%end %>
 <%= link_to "Back", sessions_show_path%>
