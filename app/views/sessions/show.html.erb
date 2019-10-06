@@ -1,7 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Dashboard for: </b><%= current_user.name %>
+<h2> <%= @current_user.level %> dashboard</h2> <br>
 
+<body>
+  <%case @current_user.level
+    when 'admin' %>
+      <%= link_to "Libraries", libraries_path %> <br>
+      <%= link_to "Students", users_path(:level => 'students') %> <br>
+      <%= link_to "Librarians", users_path(:level => 'librarians') %> <br>
+      <%= link_to "Books", books_path %> <br>
+      <%= link_to "Hold Requests", hold_requests_path %> <br>
+      <%= link_to "Profile", user_path(@current_user) %> <br>
+    <%when 'student' %>
+<!--      <%#= link_to "Users", books_path(university: current_user.university) %> <br>-->
+      <%= link_to "Libraries", libraries_path %> <br>
+      <%= link_to "Books", books_path %> <br>
+      <%= link_to "Profile", user_path(@current_user) %> <br>
+    <%else %>
+  <%end %>
 
-</p>
+</body>
+

@@ -5,11 +5,21 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    # @users = User.where(level: "student")
+  end
+
+  def students
+    @users = User.where(level: "student")
+  end
+
+  def librarians
+    @users = User.where(level: "librarian")
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @current_user =  current_user # call helper method
     @user = User.find(params[:id])
 
     respond_to do |format|
