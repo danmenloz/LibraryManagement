@@ -1,4 +1,19 @@
 <h2>Listing Books</h2>
+<%= form_tag books_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search Title", :title => nil %>
+  </p>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search ISBN", :isbn => nil %>
+  </p>
+<% end %>
+
+<%= form_tag books_path, :method => 'get'  do %>
+  <%= text_field_tag :search, params[:search]%>
+  <%= submit_tag "Search", :name => nil  %>
+<% end %>
 
 <table>
   <tr>

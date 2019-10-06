@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user
   
   def current_user
     if session[:user_id]
@@ -8,4 +7,6 @@ class ApplicationController < ActionController::Base
       @current_user = nil
     end
   end
+
+  helper_method :current_user
 end
