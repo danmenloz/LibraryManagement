@@ -1,6 +1,7 @@
 
 
 <h2>Listing Books</h2>
+
 <%= form_tag(books_path, method: :get) do %>
   <p><b>Search by the Title</b><p><%= text_field_tag :search_title, nil%></p></p>
   <p><b>Search by the Author</b><p><%= text_field_tag :search_author, nil %></p></p>

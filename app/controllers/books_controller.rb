@@ -9,6 +9,7 @@ class BooksController < ApplicationController
 
   def index
 
+
     @books = if (params[:search_title] || params[:search_author] || params[:search_subject] || params[:search_published] )
                if (params[:search_published]=="")
                  Book.where('lower(title) LIKE ? and lower(author) LIKE ? and lower(subject) LIKE ?', "%#{params[:search_title].downcase}%","%#{params[:search_author].downcase}%","%#{params[:search_subject].downcase}%")
@@ -18,6 +19,7 @@ class BooksController < ApplicationController
              else
                Book.all
              end
+
 
     respond_to do |format|
       format.html # index.html.erb
