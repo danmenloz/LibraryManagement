@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   end
 
   def index
-
+    @current_user =  current_user # call helper method
 
     @books = if (params[:search_title] || params[:search_author] || params[:search_subject] || params[:search_published] )
                if (params[:search_published]=="")

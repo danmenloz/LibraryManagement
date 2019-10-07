@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'sessions/new'
   get 'sessions/show'
   get 'sessions/create'
@@ -10,6 +11,7 @@ Rails.application.routes.draw do
   resources :libraries
   resources :books
   resources :sessions
+  resources :bookmarks
 
   root 'sessions#new'
 

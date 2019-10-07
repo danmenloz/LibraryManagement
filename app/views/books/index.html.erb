@@ -1,4 +1,5 @@
  <h2>Listing All Books </h2>
+ <p id="notice"><%= notice %></p>
 <!-- <br> <%#= params %>-->
 
 <%= form_tag(books_path, method: :get) do %>
@@ -11,16 +12,15 @@
        <th><b>Publish date</b></th>
      </tr>
      <tr>
-       <th><b>Search by:  </b></th>
+       <th><b><%= submit_tag 'Search by' %> </b></th>
        <th> <%= text_field_tag :search_title, nil%> </th>
        <th> <%= text_field_tag :search_author, nil%> </th>
        <th> <%= text_field_tag :search_subject, nil%> </th>
        <th> <%= date_field_tag :search_published, nil%> </th>
      </tr>
    </table>
-  <%= submit_tag 'Search' %>
 <% end %>
- 
+<br>
 <table>
   <tr>
     <th>ISBN</th>
@@ -50,12 +50,20 @@
           <td><%= book.subject%></td>
           <td><%= book.library.name + '-' + book.library.university %></td>
           <td><%= book.special%></td>
-        <%unless  current_user.level == 'student' %>
+        <%if  @current_user.level != 'student' %>
           <td><%= link_to 'Details', book %></td>
           <td><%= link_to 'Edit', edit_book_path(book) %></td>
           <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <%else if current_user.university == book.library.university %>
-          <%end %>
+          <%else
+              if @current_user.university == book.library.university &&
+                book.copies>0%>
+
+<!--                  <td> <%#= button_to 'Request', hold_requests_path(:user_id => @current_user.id, :book_id => book.id) %> </td>-->
+                <td><%= link_to 'Request',new_hold_request_path(:user_id => @current_user.id,
+                                                                :book_id => book.id,
+                                                                :copy => book.copies,
+                                                                :special => book.special ) %></td>
+              <%end %>
         <% end %>
       </tr>
     <% end %>
