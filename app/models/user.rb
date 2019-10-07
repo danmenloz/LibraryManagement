@@ -2,7 +2,6 @@ class User < ApplicationRecord
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   #has_many :hold_requests, dependent: :destroy
-  #belongs_to :library
 
   validates :level, presence: true, inclusion: { in: ["admin", "librarian", "student"] }
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
@@ -12,7 +11,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }
   validates :ed_level, presence: true, if: :is_student?, inclusion: { in: ["Undergraduate", "Masters", "Doctoral"] }
   validates :university, presence: true, if: :is_student?
-  validates :max_books, presence: true, if: :is_student?
+  validates :max_books, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }, if: :is_student?
   validates :library_id, presence: true, if: :is_librarian?
 
   def is_admin?
