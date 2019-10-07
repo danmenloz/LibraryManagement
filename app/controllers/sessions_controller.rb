@@ -1,9 +1,16 @@
 class SessionsController < ApplicationController
   def new
+    @current_user =  current_user # call helper method
+    unless @current_user.nil?
+      redirect_to :home # go to dashboard
+    end
   end
 
   def show
     @current_user =  current_user # call helper method
+    if @current_user.nil?
+      redirect_to :root #go to sign up page
+    end
 
     respond_to do |format|
       format.html # show.html.erb
