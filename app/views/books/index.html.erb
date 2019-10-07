@@ -1,13 +1,26 @@
- <h2>Listing All Books <br> <%= params %></h2>
+ <h2>Listing All Books </h2>
+<!-- <br> <%#= params %>-->
 
 <%= form_tag(books_path, method: :get) do %>
-  <p><b>Search by the Title</b><p><%= text_field_tag :search_title, nil%></p></p>
-  <p><b>Search by the Author</b><p><%= text_field_tag :search_author, nil %></p></p>
-  <p><b>Search by the Subject</b><p><%= text_field_tag :search_subject , nil%></p></p>
-  <p><b>Search by the Published date</b><p><%= date_field_tag :search_published %></p></p>
-
+   <table>
+     <tr>
+       <th></th>
+       <th><b>Title</b></th>
+       <th><b>Author</b></th>
+       <th><b>Subject</b></th>
+       <th><b>Publish date</b></th>
+     </tr>
+     <tr>
+       <th><b>Search by:  </b></th>
+       <th> <%= text_field_tag :search_title, nil%> </th>
+       <th> <%= text_field_tag :search_author, nil%> </th>
+       <th> <%= text_field_tag :search_subject, nil%> </th>
+       <th> <%= date_field_tag :search_published, nil%> </th>
+     </tr>
+   </table>
   <%= submit_tag 'Search' %>
 <% end %>
+ 
 <table>
   <tr>
     <th>ISBN</th>
