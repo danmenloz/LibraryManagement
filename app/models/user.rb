@@ -42,5 +42,6 @@ class User < ApplicationRecord
       university = "N/A"
       max_books = 2
     end
+    return user
   end
 end
