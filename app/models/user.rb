@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  before_create :set_max_books
+  before_update :set_max_books
+  before_save :set_max_books
+  
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   #has_many :hold_requests, dependent: :destroy
