@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 2019_10_07_121246) do
     t.string "university"
     t.integer "max_books"
     t.integer "library_id"
+    t.string "google_token"
+    t.string "google_refresh_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
