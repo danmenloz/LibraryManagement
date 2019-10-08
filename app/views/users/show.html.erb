@@ -27,7 +27,7 @@
 <p>
   <% if @user.level == "librarian" %>
   <b>Library:</b>
-  <%= Library.get_lib(@user) %>
+  <%= Library.get_lib(@user).name %>
   <% end %>
 </p>
 

@@ -8,6 +8,6 @@ class Library < ActiveRecord::Base
   validates :name, :uniqueness => { :scope => :university, :message => ": pair (name-university) already exists!" } # the pair :name,:university must be unique
 
   def Library.get_lib(user)
-    self.find(user.library_id).name
+    self.find(user.library_id)
   end
 end

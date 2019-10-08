@@ -2,6 +2,7 @@ class HoldRequest < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
+
   # validates :book_id ,:user_id, presence:true
 
   # validates :user_id, presence: true
@@ -10,7 +11,8 @@ class HoldRequest < ApplicationRecord
   # validates :needs_approval, presence: true, inclusion: { in: [true, false] }
   # validates :due_date, presence: true
 
-  def get_book(book_id)
-    Book.find(book_id)
+  # Return the book object from the Hold Request
+  def get_book
+    Book.find(self.book_id)
   end
 end

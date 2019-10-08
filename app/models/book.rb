@@ -12,4 +12,9 @@ class Book < ApplicationRecord
   def requested_by(user)
     HoldRequest.where(book_id: self.id, user_id: user.id).ids.any?
   end
+
+  def get_lib
+    Library.find(self.library_id)
+  end
+
 end

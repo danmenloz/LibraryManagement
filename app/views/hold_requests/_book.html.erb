@@ -12,10 +12,10 @@
   </tr>
   <tr>
     <th style="text-align:right">Copies:</th>
-    <td><%= @book.copies %></td>
+    <td><%= @book.copies.to_s + ' available' %></td>
   </tr>
   <tr>
     <th style="text-align:right">Approval?</th>
-    <td><%= @book.special %></td>
+    <td><%= @book.special ? 'Required' : 'Not Required' %></td>
   </tr>
 </table>

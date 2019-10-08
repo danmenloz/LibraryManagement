@@ -33,7 +33,7 @@
 <p>
   <b>Cover file:</b>
   <%#= @book.cover %>
-  <%= image_tag(@book.cover ) %>
+  <%= image_tag(@book.cover, height: '140', width: '100' ) %>
 
 </p>
 
@@ -48,7 +48,7 @@
 </p>
 
 <p>
-  <b>Special Collection?:</b>
+  <b>Special Collection?</b>
   <%= @book.special %>
 </p>
 <p>
