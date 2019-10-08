@@ -28,7 +28,7 @@ class User < ApplicationRecord
     @level == "student"
   end
 
-  def set_max_books
+  def @set_max_books
     if @ed_level == "Undergraduate"
       @max_books = 2
     elsif @ed_level == "Masters"
