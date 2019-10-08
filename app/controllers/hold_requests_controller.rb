@@ -64,7 +64,7 @@ class HoldRequestsController < ApplicationController
   def destroy
     @hold_request.destroy
     respond_to do |format|
-      format.html { redirect_to hold_requests_url, notice: 'Hold request was successfully destroyed.' }
+      format.html { redirect_to hold_requests_url, notice: 'Hold request was successfully deleted.' }
       format.json { head :no_content }
     end
   end

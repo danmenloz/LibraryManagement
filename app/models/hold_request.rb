@@ -9,4 +9,8 @@ class HoldRequest < ApplicationRecord
   # validates :state, presence: true, inclusion: { in: ["requested", "approved", "ready", "checked_out", "returned"] }
   # validates :needs_approval, presence: true, inclusion: { in: [true, false] }
   # validates :due_date, presence: true
+
+  def get_book(book_id)
+    Book.find(book_id)
+  end
 end

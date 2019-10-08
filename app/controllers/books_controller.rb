@@ -1,12 +1,5 @@
 class BooksController < ApplicationController
 
-
-  def book_params
-    params.require(:book).permit(:isbn, :title, :author, :language,
-                                 :published, :edition, :cover, :subject,
-                                 :summary, :special, :copies, :library_id)
-  end
-
   def index
     @current_user =  current_user # call helper method
 
@@ -99,7 +92,13 @@ class BooksController < ApplicationController
     end
   end
 
+private
 
+  def book_params
+    params.require(:book).permit(:isbn, :title, :author, :language,
+                                 :published, :edition, :cover, :subject,
+                                 :summary, :special, :copies, :library_id)
+  end
 
 
 end

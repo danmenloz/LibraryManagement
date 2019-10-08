@@ -5,20 +5,23 @@
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th>Folio</th>
+      <th>Book title</th>
+      <th>Book author</th>
+      <th>Status</th>
     </tr>
   </thead>
 
   <tbody>
     <% @hold_requests.each do |hold_request| %>
+      <% book = hold_request.get_book(hold_request.book_id) %>
       <tr>
-        <td><%= hold_request.class %></td>
         <td><%= hold_request.id %></td>
-        <td><%= hold_request.book_id %></td>
-        <td><%= hold_request.user_id %></td>
-        <td><%= link_to 'Show', hold_request %></td>
-        <td><%= link_to 'Edit', edit_hold_request_path(hold_request.id) %></td>
-        <td><%= link_to 'Destroy', hold_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= hold_request.status %></td>
+        <td><%= link_to 'Details', hold_request %></td>
+        <td><%= link_to 'Delete', hold_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

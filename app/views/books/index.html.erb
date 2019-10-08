@@ -56,12 +56,9 @@
           <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%else
               if @current_user.university == book.library.university &&
-                book.copies>0%>
-
-<!--                  <td> <%#= button_to 'Request', hold_requests_path(:user_id => @current_user.id, :book_id => book.id) %> </td>-->
+                book.copies>0 && !book.requested_by(@current_user)  %>
                 <td><%= link_to 'Request',new_hold_request_path(:user_id => @current_user.id,
-                                                                :book_id => book.id,
-                                                                :copy => book.copies) %></td>
+                                                                :book_id => book.id) %></td>
               <%end %>
         <% end %>
       </tr>
