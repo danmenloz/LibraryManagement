@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h2> <%= @current_user.level %> dashboard</h2> <br>
+<h2> <%= @current_user.level.capitalize %> Dashboard</h2>
+<h3> <%= @current_user.name.titleize %> </h3> <br>
 
 <body>
   <%case @current_user.level
