@@ -34,13 +34,13 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |user|
-      @level = "student"
-      @email = auth.info.email
-      @name = auth.info.name
-      @password = "12345678"
-      @ed_level = "Undergraduate"
-      @university = "N/A"
-      @max_books = 2
+      level = "student"
+      email = auth.info.email
+      name = auth.info.name
+      password = "12345678"
+      ed_level = "Undergraduate"
+      university = "N/A"
+      max_books = 2
     end
   end
 end

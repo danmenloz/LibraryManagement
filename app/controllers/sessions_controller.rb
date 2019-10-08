@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to :home, notice: "Welcome " + user.name + "!"
     else
-      render "new", notice: "Email or password is invalid"
+      redirect_to root_url, notice: "Email or password is invalid"
     end
   end
 
