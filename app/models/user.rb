@@ -26,6 +26,16 @@ class User < ApplicationRecord
     @level == "student"
   end
 
+  def set_max_books
+    if @ed_level == "Undergraduate"
+      @max_books = 2
+    elsif @ed_level == "Masters"
+      @max_books = 4
+    elsif @ed_level == "Doctoral"
+      @max_books = 6
+    end
+  end
+
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
@@ -42,6 +52,5 @@ class User < ApplicationRecord
       user.university = "N/A"
       user.max_books = 2
     end
-    return user
   end
 end

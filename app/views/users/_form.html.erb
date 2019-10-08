@@ -28,11 +28,11 @@
   <%= select("user", "library_id", [""] + Library.all.collect{ |l| [ "#{l.name + ' - ' + l.university}", l.id ] }) %><br /><br />
   
   <%= form.label :ed_level %>
-  <%= select("user", ["ed_level", "max_books"], [["", 0], ["Undergraduate", 2], ["Masters", 4], ["Doctoral", 6]]) %><br /><br />
+  <%= select("user", "ed_level", ["", "Undergraduate", "Masters", "Doctoral"]) %><br /><br />
   
   <%= form.label :university %>
   <%= select("user", "university", [""] + Library.all.collect{ |l| [ l.university, l.university ] }) %><br /><br />
-  
+
   <div class="actions">
     <%= form.submit %>
   </div>
