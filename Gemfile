@@ -32,6 +32,9 @@ gem 'activestorage-validator'
 # Enable post in link_to
 gem 'jquery-rails'
 
+# Used for google authentication
+gem 'omniauth-google-oauth2'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
