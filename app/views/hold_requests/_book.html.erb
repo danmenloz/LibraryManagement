@@ -1,0 +1,21 @@
+<table>
+  <tr>
+    <th colspan="3"> <%= @book.title %> </th>
+  </tr>
+  <tr>
+    <td style="text-align:center" colspan="3"> <%= @book.author %> </td>
+  </tr>
+  <tr>
+    <td rowspan="3"> <%= image_tag(@book.cover, height: '140', width: '100') %> </td>
+    <th style="text-align:right">Location:</th>
+    <td><%= @book.library.name + ' - ' + @book.library.university %></td>
+  </tr>
+  <tr>
+    <th style="text-align:right">Copies:</th>
+    <td><%= @book.copies %></td>
+  </tr>
+  <tr>
+    <th style="text-align:right">Approval?</th>
+    <td><%= @book.special %></td>
+  </tr>
+</table>

@@ -1,5 +1,5 @@
 class HoldRequestsController < ApplicationController
-  # before_action :set_hold_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_hold_request, only: [:show, :edit, :update, :destroy]
 
   # GET /hold_requests
   # GET /hold_requests.json
@@ -10,11 +10,15 @@ class HoldRequestsController < ApplicationController
   # GET /hold_requests/1
   # GET /hold_requests/1.json
   def show
+    @book = Book.find(@hold_request.book_id)
+    @user = User.find(@hold_request.user_id)
   end
 
   # GET /hold_requests/new
   def new
     @hold_request = HoldRequest.new
+    @book = Book.find(params[:book_id])
+    @user = User.find(params[:user_id])
   end
 
   # GET /hold_requests/1/edit
@@ -24,15 +28,15 @@ class HoldRequestsController < ApplicationController
   # POST /hold_requests
   # POST /hold_requests.json
   def create
-    # @hold_request = HoldRequest.new
-    # @hold_request.book_id = Book.find(params[:book_id])
-    # user = User.find(params[:user_id])
 
     @hold_request = HoldRequest.new(hold_request_params)
 
+    # TODO
+    # Implement Hold Request logic here
+
     respond_to do |format|
       if @hold_request.save
-        format.html { redirect_to @hold_request, notice: 'Hold request was successfully created.' }
+        format.html { redirect_to @hold_request, notice: 'Hold request created!' }
         format.json { render :show, status: :created, location: @hold_request }
       else
         format.html { render :new }
@@ -74,6 +78,8 @@ class HoldRequestsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def hold_request_params
       # params.fetch(:hold_request, {})
-      params.require(:hold_request).permit(:user_id, :book_id)
+      params.require(:hold_request).permit(:user_id, :book_id, :copy)
     end
+
+
 end

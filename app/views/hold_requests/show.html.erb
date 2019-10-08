@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_hold_request_path(@hold_request) %> |
-<%= link_to 'Back', hold_requests_path %>
+<%= render 'book' %>
+
+<%= link_to 'Delete', @hold_request, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', books_path %>

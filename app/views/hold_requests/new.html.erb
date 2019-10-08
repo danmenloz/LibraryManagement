@@ -1,5 +1,20 @@
 <h2>Confirm Hold Request</h2>
 
-<%= render 'form', hold_request: @hold_request %>
+<% if @hold_request.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@hold_request.errors.count, "error") %> prohibited this hold_request from being saved:</h2>
 
-<%= link_to 'Back', hold_requests_path %>
+    <ul>
+      <% @hold_request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= render 'book' %>
+
+<%= button_to 'Create Hold Request', hold_requests_path( hold_request:{user_id: @user.id,
+                                                                       book_id: @book.id, } ), :method => :post  %>
+<br>
+<%= link_to 'Back', :back %>

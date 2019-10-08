@@ -12,7 +12,7 @@
        <th><b>Publish date</b></th>
      </tr>
      <tr>
-       <th><b><%= submit_tag 'Search by' %> </b></th>
+       <th><b><%= submit_tag 'Search' %> </b></th>
        <th> <%= text_field_tag :search_title, nil%> </th>
        <th> <%= text_field_tag :search_author, nil%> </th>
        <th> <%= text_field_tag :search_subject, nil%> </th>
@@ -44,7 +44,7 @@
           <td><%= book.title %></td>
           <td><%= book.author %></td>
           <td><%= book.language%></td>
-          <td><%= book.published.strftime('%Y-%m-%d') %></td>
+          <td><%= book.published.strftime('%m/%d/%Y') %></td>
           <td><%= book.edition%></td>
           <td><%= image_tag(book.cover, height: '70', width: '50') %></td>
           <td><%= book.subject%></td>
@@ -61,8 +61,7 @@
 <!--                  <td> <%#= button_to 'Request', hold_requests_path(:user_id => @current_user.id, :book_id => book.id) %> </td>-->
                 <td><%= link_to 'Request',new_hold_request_path(:user_id => @current_user.id,
                                                                 :book_id => book.id,
-                                                                :copy => book.copies,
-                                                                :special => book.special ) %></td>
+                                                                :copy => book.copies) %></td>
               <%end %>
         <% end %>
       </tr>
@@ -72,5 +71,7 @@
 
 <br />
 
-<%= link_to 'New Book', new_book_path %> |
+<% if @current_user.level != 'student' %>
+  <%= link_to 'New Book', new_book_path %> |
+<% end %>
 <%= link_to "Back", sessions_show_path%>

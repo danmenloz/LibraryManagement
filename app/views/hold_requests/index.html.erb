@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Hold Requests</h1>
+<h2>Hold Requests</h2>
 
 <table>
   <thead>
@@ -12,8 +12,12 @@
   <tbody>
     <% @hold_requests.each do |hold_request| %>
       <tr>
+        <td><%= hold_request.class %></td>
+        <td><%= hold_request.id %></td>
+        <td><%= hold_request.book_id %></td>
+        <td><%= hold_request.user_id %></td>
         <td><%= link_to 'Show', hold_request %></td>
-        <td><%= link_to 'Edit', edit_hold_request_path(hold_request) %></td>
+        <td><%= link_to 'Edit', edit_hold_request_path(hold_request.id) %></td>
         <td><%= link_to 'Destroy', hold_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -22,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Hold Request', new_hold_request_path %>
+<%= link_to "Back", sessions_show_path%>
