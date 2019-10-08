@@ -1,7 +1,5 @@
 class User < ApplicationRecord
-  before_create :set_max_books
-  before_update :set_max_books
-  before_save :set_max_books
+  before_validation :set_max_books, on: [ :create, :update ]
   
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
