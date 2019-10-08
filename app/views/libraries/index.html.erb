@@ -19,7 +19,7 @@
     <%unless  current_user.level == 'student' %>
       <td><%= link_to 'Details', library %></td>
       <td><%= link_to 'Edit', edit_library_path(library) %></td>
-      <td><%= link_to 'Destroy', library, method: :delete, data: { confirm: 'This will delete all dependents too! Are you sure?' } %></td>
+      <td><%= link_to 'Delete', library, method: :delete, data: { confirm: 'This will delete all dependents too! Are you sure?' } %></td>
     <% end %>
   </tr>
   <%end%>

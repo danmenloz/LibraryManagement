@@ -1,3 +1,5 @@
+<p id="alert" style="color:Tomato;"><%= alert %></p>
+
 <h2>Confirm Hold Request</h2>
 
 <% if @hold_request.errors.any? %>
@@ -17,4 +19,4 @@
 <%= button_to 'Create Hold Request', hold_requests_path( hold_request:{user_id: @user.id,
                                                                        book_id: @book.id, } ), :method => :post  %>
 <br>
-<%= link_to 'Back', :back %>
+<%= link_to 'Back', books_path %>

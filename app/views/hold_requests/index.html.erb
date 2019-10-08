@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<p id="alert" style="color:Tomato;"><%= alert %></p>
 
 <h2>Hold Requests</h2>
 
@@ -6,6 +7,7 @@
   <thead>
     <tr>
       <th>Folio</th>
+      <th>User id</th>
       <th>Book title</th>
       <th>Book author</th>
       <th>Status</th>
@@ -14,9 +16,10 @@
 
   <tbody>
     <% @hold_requests.each do |hold_request| %>
-      <% book = hold_request.get_book(hold_request.book_id) %>
+      <% book = hold_request.get_book %>
       <tr>
         <td><%= hold_request.id %></td>
+        <td><%= hold_request.user_id %></td>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= hold_request.status %></td>
