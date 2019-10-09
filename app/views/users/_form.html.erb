@@ -32,10 +32,7 @@
   
   <%= form.label :university %>
   <%= select("user", "university", [""] + Library.all.collect{ |l| [ l.university, l.university ] }) %><br /><br />
-  
-  <%= form.label :max_books %>
-  <%= form.text_field :max_books %><br /><br />
-  
+
   <div class="actions">
     <%= form.submit %>
   </div>

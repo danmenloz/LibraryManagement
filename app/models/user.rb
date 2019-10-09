@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_validation :set_max_books, on: [ :create, :update ]
+  
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   #has_many :hold_requests, dependent: :destroy
@@ -26,16 +28,33 @@ class User < ApplicationRecord
     @level == "student"
   end
 
+  def set_max_books
+    if ed_level == "Undergraduate"
+      max_books = 2
+    elsif ed_level == "Masters"
+      max_books = 4
+    elsif ed_level == "Doctoral"
+      max_books = 6
+    else
+      max_books = 0
+    end
+  end
+
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
-  def from_omniauth(auth)
+  def self.from_omniauth(auth)
     # Creates a new user only if it doesn't exist
     where(email: auth.info.email).first_or_initialize do |user|
-      @name = auth.info.name
-      @email = auth.info.email
+      user.level = "student"
+      user.email = auth.info.email
+      user.name = auth.info.name
+      user.password = "12345678"
+      user.ed_level = "Undergraduate"
+      user.university = "N/A"
+      user.max_books = 2
     end
   end
 end

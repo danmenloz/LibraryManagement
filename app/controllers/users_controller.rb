@@ -19,7 +19,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @current_user =  current_user # call helper method
+    @current_user = current_user # call helper method
+    if @current_user.nil?
+      redirect_to :root #go to sign up page
+    end
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -31,7 +34,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @current_user =  current_user # call helper method
+    @current_user = current_user # call helper method
   end
 
   # GET /users/1/edit
@@ -43,7 +46,6 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
