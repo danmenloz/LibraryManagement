@@ -1,6 +1,6 @@
 <h1>Editing User</h1>
 
-<% if @user.level == "student" %>
+<% if @current_user.level == "student" %>
 <%= render 'editform', user: @user %>
 <% else %>
 <%= render 'form', user: @user %>
