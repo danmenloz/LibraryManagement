@@ -6,7 +6,9 @@ ruby '2.6.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
+# gem 'sqlite3'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -31,6 +33,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'activestorage-validator'
 # Enable post in link_to
 gem 'jquery-rails'
+# Testing
+
 
 # Used for google authentication
 gem 'omniauth-google-oauth2'
