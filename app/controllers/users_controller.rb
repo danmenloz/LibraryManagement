@@ -45,6 +45,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    set_max_books
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
@@ -60,6 +61,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    set_max_books
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -90,5 +92,17 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :level, :ed_level, :university, :max_books, :library_id)
+    end
+
+    def set_max_books
+      if params[:ed_level] == "Undergraduate"
+        params[:max_books] = 2
+      elsif params[:ed_level] == "Masters"
+        params[:max_books] = 4
+      elsif params[:ed_level] == "Doctoral"
+        params[:max_books] = 6
+      else
+        params[:max_books] = 0
+      end
     end
 end

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_validation :set_max_books, on: [ :create, :update ]
+  #before_validation :set_max_books, on: [ :create, :update ]
   
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -26,18 +26,6 @@ class User < ApplicationRecord
 
   def is_student?
     @level == "student"
-  end
-
-  def set_max_books
-    if params[:ed_level] == "Undergraduate"
-      params[:max_books] = 2
-    elsif params[:ed_level] == "Masters"
-      params[:max_books] = 4
-    elsif params[:ed_level] == "Doctoral"
-      params[:max_books] = 6
-    else
-      params[:max_books] = 0
-    end
   end
 
   def User.digest(string)
