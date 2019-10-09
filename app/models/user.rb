@@ -29,14 +29,14 @@ class User < ApplicationRecord
   end
 
   def set_max_books
-    if @ed_level == "Undergraduate"
-      @max_books = 2
-    elsif @ed_level == "Masters"
-      @max_books = 4
-    elsif @ed_level == "Doctoral"
-      @max_books = 6
+    if params[:ed_level] == "Undergraduate"
+      params[:max_books] = 2
+    elsif params[:ed_level] == "Masters"
+      params[:max_books] = 4
+    elsif params[:ed_level] == "Doctoral"
+      params[:max_books] = 6
     else
-      @@max_books = 0
+      params[:max_books] = 0
     end
   end
 
