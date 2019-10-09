@@ -34,7 +34,7 @@ gem 'jquery-rails'
 
 # Used for google authentication
 gem 'omniauth-google-oauth2'
-
+gem 'rspec'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
