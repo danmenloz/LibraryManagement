@@ -17,26 +17,26 @@ class User < ApplicationRecord
   validates :library_id, presence: true, if: :is_librarian?
 
   def is_admin?
-    @level == "admin"
+    @@level == "admin"
   end
 
   def is_librarian?
-    @level == "librarian"
+    @@level == "librarian"
   end
 
   def is_student?
-    @level == "student"
+    @@level == "student"
   end
 
   def set_max_books
-    if ed_level == "Undergraduate"
-      max_books = 2
-    elsif ed_level == "Masters"
-      max_books = 4
+    if @@ed_level == "Undergraduate"
+      @@max_books = 2
+    elsif @@ed_level == "Masters"
+      @@max_books = 4
     elsif ed_level == "Doctoral"
-      max_books = 6
+      @@max_books = 6
     else
-      max_books = 0
+      @@max_books = 0
     end
   end
 
