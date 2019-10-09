@@ -21,8 +21,13 @@
   <%= form.label :password %>
   <%= form.password_field :password %><br /><br />
   
+  <% if @user.level != "admin" %>
+  <%= form.label :level %>
+  <%= select("user", "level", ['', 'student']) %><br /><br />
+  <% elsif @current_user == "admin" %>
   <%= form.label :level %>
   <%= select("user", "level", ['', 'librarian', 'student']) %><br /><br />
+  <% end %>
 
   <%= form.label :library_id %>
   <%= select("user", "library_id", [""] + Library.all.collect{ |l| [ "#{l.name + ' - ' + l.university}", l.id ] }) %><br /><br />
