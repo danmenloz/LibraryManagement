@@ -40,6 +40,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @current_user = current_user # call helper method
   end
 
   # POST /users
