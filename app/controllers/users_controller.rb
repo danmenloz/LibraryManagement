@@ -47,7 +47,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.max_books = @user.set_max_books(@user.ed_level)
-    end
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
