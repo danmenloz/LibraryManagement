@@ -35,7 +35,7 @@
 
   <div>
     <%= f.label "Overdue fines ($/day)" %>
-    <%= f.number_field :overdue_fines, value: number_to_currency(f.object.overdue_fines.to_f, delimiter: '', unit: ''), step: 0.5 %>
+    <%= f.number_field :overdue_fines, value: number_to_currency(f.object.overdue_fines.to_f, delimiter: '', unit: ''), step: 0.1 %>
   </div>
 
   <br>

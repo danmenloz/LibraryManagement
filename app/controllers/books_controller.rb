@@ -2,6 +2,7 @@ class BooksController < ApplicationController
 
   def index
     @current_user =  current_user # call helper method
+    @list = params[:list] # retrieve list parameter from hash
 
     @books = if (params[:search_title] || params[:search_author] || params[:search_subject] || params[:search_published] )
                if (params[:search_published]=="")
@@ -24,6 +25,7 @@ class BooksController < ApplicationController
   # GET /books/1.json
   def show
     @book = Book.find(params[:id])
+    @requests = HoldRequest.where(book_id: @book.id)
 
     respond_to do |format|
       format.html # show.html.erb

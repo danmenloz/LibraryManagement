@@ -10,7 +10,9 @@ class Book < ApplicationRecord
   validates :cover, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..5.megabytes }\
 
   def requested_by(user)
-    HoldRequest.where(book_id: self.id, user_id: user.id).ids.any?
+    HoldRequest.where(book_id: self.id, user_id: user.id, status: 'approval').ids.any? ||
+        HoldRequest.where(book_id: self.id, user_id: user.id, status: 'checkout').ids.any? ||
+        HoldRequest.where(book_id: self.id, user_id: user.id, status: 'waitlist').ids.any?
   end
 
   def get_lib

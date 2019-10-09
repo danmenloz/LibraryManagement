@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<h2>Hold Request <%= @hold_request.id %></h2>
+<h2>Book Request <%= @hold_request.id %></h2>
 
 <%= render 'book' %>
 
@@ -19,6 +19,7 @@
     <td><%=@hold_request.book_id.to_s + '(' + @hold_request.copy.to_s + ')' %></td>
     <td><%=@hold_request.user_id %></td>
     <td><%=@hold_request.status %></td>
+
     <% if @hold_request.status == 'checkout' %>
       <td><%= @hold_request.checkout_date.strftime('%m/%d/%Y')%></td>
       <td><%= '-' %></td>
@@ -31,5 +32,5 @@
 <br>
 
 <%= link_to 'Delete', @hold_request, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Hold Requests', hold_requests_path %> |
+<%= link_to 'Requests', hold_requests_path %> |
 <%= link_to 'Books', books_path %>

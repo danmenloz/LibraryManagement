@@ -1,61 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>ISBN:</b>
-  <%= @book.isbn %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @book.title %>
-</p>
-
-<p>
-  <b>Author(s):</b>
-  <%= @book.author %>
-</p>
-
-<p>
-  <b>Language:</b>
-  <%= @book.language %>
-</p>
-
-<p>
-  <b>Publish date:</b>
-  <%= @book.published %>
-</p>
-
-<p>
-  <b>Edition:</b>
-  <%= @book.edition %>
-</p>
-
-<p>
-  <b>Cover file:</b>
-  <%#= @book.cover %>
-  <%= image_tag(@book.cover, height: '140', width: '100' ) %>
-
-</p>
-
-<p>
-  <b>Subject:</b>
-  <%= @book.subject %>
-</p>
-
-<p>
-  <b>Summary:</b>
-  <%= @book.summary %>
-</p>
-
-<p>
-  <b>Special Collection?</b>
-  <%= @book.special %>
-</p>
-<p>
-  <b>Availability</b>
-  <%=@book.copies %>
-</p>
+<%= render 'book' %>
+<br>
+<table>
+  <tr>
+    <th colspan="5"> Borrow History </th>
+  </tr>
+  <tr>
+    <th>Request</th>
+    <th>Book id</th>
+    <th>Student id</th>
+    <th>Status</th>
+    <th>Checked Out Date</th>
+    <th>Return Date</th>
+  </tr>
+  <%  if !@requests.nil? then @requests.each do |request| %>
+  <tr>
+    <td><%= request.id %></td>
+    <td><%= request.book_id.to_s + '(' + request.copy.to_s + ')'  %></td>
+    <td><%= request.user_id %></td>
+    <td><%= case request.status
+            when 'checkout'
+              'Checked out'
+            when 'waitlist'
+              'In Wait List'
+            when 'approval'
+              'Requires Approval'
+            when 'returned'
+              'Returned'
+            else
+            end%></td>
+    <% if !request.checkout_date.nil? %>
+      <td><%= request.checkout_date.strftime('%m/%d/%Y') %></td>
+      <td><%= request.return_date.strftime('%m/%d/%Y') %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+    <%end %>
+  </tr>
+  <%end %>
+  <%end %>
 
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
+</table>
+<br>
+
+<%= link_to 'Edit Book', edit_book_path(@book) %> |
 <%= link_to 'Back', books_url() %>

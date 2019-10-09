@@ -1,6 +1,5 @@
- <h2>Listing All Books </h2>
+ <h2>Listing All Books <%= @list %> </h2>
  <p id="notice"><%= notice %></p>
-<!-- <br> <%#= params %>-->
 
 <%= form_tag(books_path, method: :get) do %>
    <table>

@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
 <p id="alert" style="color:Tomato;"><%= alert %></p>
 
-<h2>Hold Requests</h2>
+<h2><%= @list.titleize %></h2>
 
 <table>
   <thead>
     <tr>
+      <th></th>
       <th>Folio</th>
       <th>User id</th>
       <th>Book title</th>
@@ -18,13 +19,14 @@
     <% @hold_requests.each do |hold_request| %>
       <% book = hold_request.get_book %>
       <tr>
+        <td> <%= image_tag(book.cover, height: '45', width: '30') %> </td>
         <td><%= hold_request.id %></td>
         <td><%= hold_request.user_id %></td>
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= hold_request.status %></td>
         <td><%= link_to 'Details', hold_request %></td>
-        <td><%= link_to 'Delete', hold_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Return Book', hold_request, method: :delete, data: { confirm: 'Are you sure you want to return the book and close the request?' } %></td>
       </tr>
     <% end %>
   </tbody>

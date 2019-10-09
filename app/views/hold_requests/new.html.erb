@@ -1,6 +1,6 @@
 <p id="alert" style="color:Tomato;"><%= alert %></p>
 
-<h2>Confirm Hold Request</h2>
+<h2>Confirm Book Request</h2>
 
 <% if @hold_request.errors.any? %>
   <div id="error_explanation">
@@ -16,7 +16,7 @@
 
 <%= render 'book' %>
 
-<%= button_to 'Create Hold Request', hold_requests_path( hold_request:{user_id: @user.id,
+<%= button_to 'Create Request', hold_requests_path( hold_request:{user_id: @user.id,
                                                                        book_id: @book.id, } ), :method => :post  %>
 <br>
 <%= link_to 'Back', books_path %>
