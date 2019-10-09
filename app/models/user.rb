@@ -16,14 +16,6 @@ class User < ApplicationRecord
   validates :max_books, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }, if: :is_student?
   validates :library_id, presence: true, if: :is_librarian?
 
-  @level = nil
-  @email = nil
-  @name = nil
-  @password = nil
-  @ed_level = nil
-  @university = nil
-  @library_id = nil
-
   def is_admin?
     @level == "admin"
   end
@@ -37,14 +29,14 @@ class User < ApplicationRecord
   end
 
   def set_max_books
-    if @ed_level == "Undergraduate"
-      @max_books = 2
-    elsif @ed_level == "Masters"
-      @max_books = 4
-    elsif @ed_level == "Doctoral"
-      @max_books = 6
+    if :ed_level == "Undergraduate"
+      :max_books = 2
+    elsif :ed_level == "Masters"
+      :max_books = 4
+    elsif :ed_level == "Doctoral"
+      :max_books = 6
     else
-      @max_books = 0
+      :max_books = 0
     end
   end
 
