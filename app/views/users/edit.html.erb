@@ -1,6 +1,10 @@
 <h1>Editing User</h1>
 
+<% if @current_user.level == "student" %>
+<%= render 'editform', user: @user %>
+<% else %>
 <%= render 'form', user: @user %>
+<% end %>
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', :back %>
