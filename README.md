@@ -8,8 +8,6 @@
 
 # Links
 
-[Requirements Review](https://docs.google.com/document/d/1A2-CUS2L1p53WVMInx_t4NSveBCi9HOzMBihZ65bKI8/edit?usp=sharing)
-
 [Heroku Link](https://lit-atoll-42842.herokuapp.com/)
 
 # Admin Login
