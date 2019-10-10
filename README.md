@@ -1,5 +1,5 @@
 ## CSC/ECE 517 - Object Oriented Design and Development
-# Program 2 - Ruby on Rails
+## Program 2 - Ruby on Rails - Library Management
 
 # Team
 * Daniel Mendez Lozada
@@ -26,3 +26,24 @@
 
 # Librarian Login
 * Test Librarian credentials: librarian@ncsu.edu  librarian
+
+# Librarian Features
+* Librarians can be created by signing up as a student but assigning a library id to a user. An admin can then choose to promote a user to librarian.
+* Once the dashboard is reached the librarian can view and edit their profile by clicking the profile button. 
+* Clicking the Libraries link will list all libraries, with the links next to each entry allowing editing details.
+* Clicking trhe Books link lists all books and allows the librarian to view edit and remove books from the availability list.
+* Using the view approval list the librarian can see the pending hold request and use the approve link to allow students to checkout special collection books.
+* The checked out lists shows all hold requests that have been checked out by the students.
+* Clicking the details link on any book will show the checkout history of the book.
+
+# Student Login
+* Test Student credentials: student@ncsu.edu student
+
+# Student Features
+* Using the libraries link students can view the list of libraries. Clicking the details button will show a single library.
+* Using the books link allows the student to list all books, see a book in detail, and create a new checkout/hold request.
+* The books list also allows the user to search the book list by title, author, subject, and release date. 
+* The hold requests link will show any existing hold requests for the student and will allow students to edit and delete requests. 
+
+# Bonus Features
+* The Google Login link on the homepage allows new users to sign in with their google credentials. The google account gives few details so most details are assigned by defualt, and an admin will need to update them later.

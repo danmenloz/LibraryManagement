@@ -51,9 +51,9 @@ class User < ApplicationRecord
       user.level = "student"
       user.email = auth.info.email
       user.name = auth.info.name
-      user.password = "12345678"
+      user.password = (0...8).map { (65 + rand(26)).chr }.join
       user.ed_level = "Undergraduate"
-      user.university = "N/A"
+      user.university = ""
       user.max_books = user.set_max_books(user.ed_level)
     end
   end

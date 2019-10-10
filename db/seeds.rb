@@ -6,4 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-users = User.create(level: "admin", email: "admin@ncsu.edu", name: "Aidan Maycock", password: "admin")
+libraries = Library.create(name: "Hunt", university: "NC State University", location: "Centennial Campus", max_days: 7, overdue_fines: 0.75)
+
+users = User.create(level: "admin", email: "admin@ncsu.edu", name: "Test Admin", password: "admin")
+users = User.create(level: "librarian", email: "librarian@ncsu.edu", name: "Test Librarian", password: "librarian", library_id: 1)
+users = User.create(level: "student", email: "student@ncsu.edu", name: "Test Student", password: "student", ed_level: "Masters", university: "NC State University")

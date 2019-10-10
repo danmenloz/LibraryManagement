@@ -6,7 +6,7 @@ class LibrariesController < ApplicationController
 
   def index
     @libraries = Library.all
-
+    @current_user = current_user # call helper method
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @libraries }
@@ -17,7 +17,7 @@ class LibrariesController < ApplicationController
   # GET /libraries/1.json
   def show
     @library = Library.find(params[:id])
-
+    @current_user = current_user # call helper method
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @library }

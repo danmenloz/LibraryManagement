@@ -16,18 +16,20 @@
     <td><%= library.location %></td>
     <td><%= library.max_days %></td>
     <td><%= library.overdue_fines %></td>
-    <%unless  current_user.level == 'student' %>
-      <td><%= link_to 'Details', library %></td>
+    <td><%= link_to 'Details', library %></td>
+    <% unless  current_user.level == 'student' %>
       <td><%= link_to 'Edit', edit_library_path(library) %></td>
-      <td><%= link_to 'Delete', library, method: :delete, data: { confirm: 'This will delete all dependents too! Are you sure?' } %></td>
-    <% end %>
-  </tr>
+        <% if current_user.level == 'admin' %>
+        <td><%= link_to 'Delete', library, method: :delete, data: { confirm: 'This will delete all dependents too! Are you sure?' } %></td>
+        <% end %>
+      <% end %>
+    </tr>
   <%end%>
 </table>
 
 <br />
 
-<%unless  current_user.level == 'student' %>
+<%if current_user.level == 'admin' %>
   <%= link_to 'New Library', new_library_path%> |
 <%end %>
 <%= link_to "Back", sessions_show_path%>

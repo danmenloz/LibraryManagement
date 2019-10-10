@@ -24,7 +24,7 @@
   <% if @user.level != "admin" %>
   <%= form.label :level %>
   <%= select("user", "level", ['', 'student']) %><br /><br />
-  <% elsif @current_user == "admin" %>
+  <% elsif @current_user == "admin" and @user.level != "admin" %>
   <%= form.label :level %>
   <%= select("user", "level", ['', 'librarian', 'student']) %><br /><br />
   <% end %>

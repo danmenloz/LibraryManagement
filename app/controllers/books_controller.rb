@@ -26,7 +26,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @requests = HoldRequest.where(book_id: @book.id)
-
+    @current_user = current_user # call helper method
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @book }

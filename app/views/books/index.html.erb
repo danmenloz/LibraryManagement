@@ -62,6 +62,7 @@
              book.copies>0 && !book.requested_by(@current_user)  %>
              <td><%= link_to 'Request',new_hold_request_path(:user_id => @current_user.id,
                                                              :book_id => book.id) %></td>
+             <td><%= link_to 'Details', book %></td>
            <%end %>
         <% end %>
       </tr>
