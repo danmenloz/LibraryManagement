@@ -21,10 +21,10 @@
   <%= form.label :password %>
   <%= form.password_field :password %><br /><br />
   
-  <% if @user.level != "admin" %>
+  <% if @user.level != "admin" and @current_user.level != "admin" %>
   <%= form.label :level %>
   <%= select("user", "level", ['', 'student']) %><br /><br />
-  <% elsif @current_user == "admin" and @user.level != "admin" %>
+  <% elsif @current_user.level == "admin" and @user.level != "admin" %>
   <%= form.label :level %>
   <%= select("user", "level", ['', 'librarian', 'student']) %><br /><br />
   <% end %>
