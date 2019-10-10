@@ -13,7 +13,7 @@
 [Heroku Link](https://lit-atoll-42842.herokuapp.com/)
 
 # Admin Login
-* Admin credentials: admin@ncsu.edu  admin
+* Admin credentials: admin@ncsu.edu  admin123
 
 # Admin Features
 * Log in to the home page using the preassigned email and password, takes you to dashboard.
@@ -37,7 +37,7 @@
 * Clicking the details link on any book will show the checkout history of the book.
 
 # Student Login
-* Test Student credentials: student@ncsu.edu student
+* Test Student credentials: student@ncsu.edu student1
 
 # Student Features
 * Using the libraries link students can view the list of libraries. Clicking the details button will show a single library.

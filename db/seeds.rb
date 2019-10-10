@@ -8,6 +8,6 @@
 
 libraries = Library.create(name: "Hunt", university: "NC State University", location: "Centennial Campus", max_days: 7, overdue_fines: 0.75)
 
-users = User.create(level: "admin", email: "admin@ncsu.edu", name: "Test Admin", password: "admin")
+users = User.create(level: "admin", email: "admin@ncsu.edu", name: "Test Admin", password: "admin123")
 users = User.create(level: "librarian", email: "librarian@ncsu.edu", name: "Test Librarian", password: "librarian", library_id: 1)
-users = User.create(level: "student", email: "student@ncsu.edu", name: "Test Student", password: "student", ed_level: "Masters", university: "NC State University")
+users = User.create(level: "student", email: "student@ncsu.edu", name: "Test Student", password: "student1", ed_level: "Masters", university: "NC State University")
