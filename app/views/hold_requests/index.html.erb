@@ -41,13 +41,13 @@
           <td><%= book.title %></td>
           <td><%= book.author %></td>
           <td><%= hold_request.status=='waitlist' ? 'hold request' : hold_request.status %></td>
-          <td><% if @list == 'Approve Requests' %>
+          <td><% if @list == 'Approve Requests' && @current_user.level!= 'student'%>
             <td><%= link_to 'Approve', approve_path(:id => hold_request.id,:list => 'Approve Requests'), data:{ confirm: 'Confirm Approval?'} %></td>
           <% end %></td>
 
           <td><%= link_to 'Details', hold_request %></td>
           <% if hold_request.status != 'returned' %>
-            <%if hold_request.status == 'waitlist' %>
+            <%if hold_request.status == 'waitlist' || hold_request.status == 'approval'%>
               <td><%= link_to 'Cancel Request', hold_request, method: :delete, data: { confirm: 'Are you sure you want to  close the request?' } %></td>
               <% else %>
               <td><%= link_to 'Return Book', hold_request, method: :delete, data: { confirm: 'Are you sure you want to return the book and close the request?' } %></td>

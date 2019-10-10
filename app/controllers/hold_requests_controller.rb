@@ -113,11 +113,13 @@ class HoldRequestsController < ApplicationController
 
         @hold_request.status = 'checkout' # Request was successful
         notice_msg = 'Book Request created. Checkout completed!'
+        @hold_request.copy = book.copies # update Hold Request field
         book.copies -= 1 # update book copies field
         book.update(copies: book.copies)
-        @hold_request.copy = book.copies # update Hold Request field
         @hold_request.checkout_date = DateTime.now
         @hold_request.return_date = @hold_request.checkout_date.next_day(book.get_lib.max_days)
+        # Send email notification
+        # UserMailer.checkout_message(user, @hold_request)
 
       end
     end
@@ -158,6 +160,7 @@ class HoldRequestsController < ApplicationController
     status = 'checkout'
     checkout_date = DateTime.now
     return_date = checkout_date.next_day(book.get_lib.max_days)
+    # UserMailer.checkout_message(User.find(@hold_request.user_id), @hold_request).deliver
 
     respond_to do |format|
       if @hold_request.update(status: status, checkout_date: checkout_date, return_date: return_date)
@@ -183,7 +186,8 @@ class HoldRequestsController < ApplicationController
       checkout_date = DateTime.now
       return_date = checkout_date.next_day(book.get_lib.max_days)
       hold.update(status: status, checkout_date: checkout_date, return_date: return_date)
-      #TODO send Email
+      # Send email notification
+      # UserMailer.checkout_message(User.find(hold.user_id), hold).deliver
     else
       book.copies += 1 # update book copies field
       book.update(copies: book.copies)
@@ -193,8 +197,10 @@ class HoldRequestsController < ApplicationController
     # Calculate the due amount
     today = DateTime.now
     bill = 0
-    unless today.between?(@hold_request.checkout_date, @hold_request.return_date)
-      bill = (today - @hold_request.return_date) * book.get_lib.overdue_fines
+    if !@hold_request.checkout_date.nil? && !@hold_request.return_date.nil?
+      unless today.between?(@hold_request.checkout_date, @hold_request.return_date)
+        bill = (today - @hold_request.return_date) * book.get_lib.overdue_fines
+      end
     end
 
     # Don't destroy instance, simply marked as returned

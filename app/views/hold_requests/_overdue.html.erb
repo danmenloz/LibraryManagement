@@ -26,9 +26,11 @@
            today = DateTime.now
            bill = 0
           if hold_request.status == 'checkout'
-           unless today.between?(hold_request.checkout_date, hold_request.return_date)
-             bill = (today - hold_request.return_date) * book.get_lib.overdue_fines
-           end
+            if !hold_request.checkout_date.nil? && !hold_request.return_date.nil?
+               unless today.between?(hold_request.checkout_date, hold_request.return_date)
+                 bill = (today - hold_request.return_date) * book.get_lib.overdue_fines
+               end
+            end
           end%>
 
         <% if user.id == hold_request.user_id && (hold_request.overdue_fine > 0 || bill>0) %>

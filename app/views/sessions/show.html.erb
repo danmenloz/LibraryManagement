@@ -20,6 +20,7 @@
       <%= link_to "Libraries", libraries_path %> <br>
       <%= link_to "Books", books_path %> <br>
       <%= link_to "Hold Requests", hold_requests_path(:list => 'Hold Requests') %> <br>
+  <%= link_to "Books in Approval Wait List", hold_requests_path(:list => 'Approve Requests') %> <br>
       <%= link_to "Checked Out Books", hold_requests_path(:list => 'Checked Out Books') %> <br>
       <%= link_to "Profile", user_path(@current_user) %> <br>
     <%when 'librarian' %>
