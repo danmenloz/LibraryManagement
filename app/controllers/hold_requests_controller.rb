@@ -1,10 +1,24 @@
 class HoldRequestsController < ApplicationController
-  before_action :set_hold_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_hold_request, only: [:show, :edit, :update, :destroy, :approve]
 
   # GET /hold_requests
   # GET /hold_requests.json
   def index
+    @current_user = current_user
+    # Limit users scope
+    case @current_user.level
+    when 'admin'
+      @users = User.all
+    when 'student'
+      @users = @current_user
+    when 'librarian'
+      #student and librarian are linked by university
+      uni_lib =  Library.find(@current_user.library_id).university
+      @users = User.where(university: uni_lib)
+    end
+
     @list = params[:list] #retreive value from params hash
+
     case @list
     when 'Hold Requests'
       @hold_requests = HoldRequest.where("status = 'waitlist'")
@@ -13,7 +27,11 @@ class HoldRequestsController < ApplicationController
     when 'Checked Out Books'
       @hold_requests = HoldRequest.where("status = 'checkout'")
     else
-
+      if @current_user.level != 'student'
+        @hold_requests = HoldRequest.all
+      else
+        @hold_requests = HoldRequest.where(user_id: @current_user.id)
+      end
     end
 
   end
@@ -73,24 +91,35 @@ class HoldRequestsController < ApplicationController
     if book.special
       @hold_request.status = 'approval' #requires librarian approval
       notice_msg = 'Book Request created. Waiting for librarian approval.'
+      @hold_request.copy = book.copies # update Hold Request field
       book.copies -= 1 # update book copies field
       book.update(copies: book.copies)
-      @hold_request.copy = book.copies # update Hold Request field
     else
       # Check existing books
       if book.copies == 0
         @hold_request.status = 'waitlist' # Hold request will be added into the wait list
         notice_msg = 'Hold Request created. Added to the wait list.'
       else
-        @hold_request.status = 'checkout' # Hold request was successful
+
+        if user.level == 'student' #verify only book limit with students
+          # Check max books
+          num_checkout = HoldRequest.where(user_id: @hold_request.user_id ,status: 'checkout').count +
+              HoldRequest.where(user_id: @hold_request.user_id ,status: 'approval').count
+          if num_checkout >= user.max_books
+            redirect_to request.referrer, alert: 'Maximum Books already checked out!'
+            return
+          end
+        end
+
+        @hold_request.status = 'checkout' # Request was successful
         notice_msg = 'Book Request created. Checkout completed!'
         book.copies -= 1 # update book copies field
         book.update(copies: book.copies)
         @hold_request.copy = book.copies # update Hold Request field
         @hold_request.checkout_date = DateTime.now
         @hold_request.return_date = @hold_request.checkout_date.next_day(book.get_lib.max_days)
+
       end
-      # Search [book_id, copy] in db to see if someone borrowed it
     end
 
 
@@ -111,9 +140,28 @@ class HoldRequestsController < ApplicationController
   # PATCH/PUT /hold_requests/1
   # PATCH/PUT /hold_requests/1.json
   def update
+
     respond_to do |format|
       if @hold_request.update(hold_request_params)
-        format.html { redirect_to @hold_request, notice: 'Hold request was successfully updated.' }
+        format.html { redirect_to request.referrer, notice: 'Hold request was successfully updated.' }
+        format.json { render :show, status: :ok, location: @hold_request }
+      else
+        format.html { render :edit }
+        format.json { render json: @hold_request.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def approve
+    # Approval parameters to be updated
+    book = @hold_request.get_book
+    status = 'checkout'
+    checkout_date = DateTime.now
+    return_date = checkout_date.next_day(book.get_lib.max_days)
+
+    respond_to do |format|
+      if @hold_request.update(status: status, checkout_date: checkout_date, return_date: return_date)
+        format.html { redirect_to request.referrer, notice: 'Request was approved.' }
         format.json { render :show, status: :ok, location: @hold_request }
       else
         format.html { render :edit }
@@ -126,15 +174,35 @@ class HoldRequestsController < ApplicationController
   # DELETE /hold_requests/1.json
   def destroy
     book = @hold_request.get_book
-    book.copies += 1 # update book copies field
-    book.update(copies: book.copies)
+    holds = HoldRequest.where(book_id: @hold_request.book_id ,status: 'waitlist')
+
+    if holds.ids.any?
+      hold = holds.first #FIFO wait list
+      # Approval parameters to be updated
+      status = 'checkout'
+      checkout_date = DateTime.now
+      return_date = checkout_date.next_day(book.get_lib.max_days)
+      hold.update(status: status, checkout_date: checkout_date, return_date: return_date)
+      #TODO send Email
+    else
+      book.copies += 1 # update book copies field
+      book.update(copies: book.copies)
+    end
+
+
+    # Calculate the due amount
+    today = DateTime.now
+    bill = 0
+    unless today.between?(@hold_request.checkout_date, @hold_request.return_date)
+      bill = (today - @hold_request.return_date) * book.get_lib.overdue_fines
+    end
 
     # Don't destroy instance, simply marked as returned
     # @hold_request.status = 'returned'
     # @hold_request.return_date = DateTime.now
-    @hold_request.update(status: 'returned', return_date: DateTime.now)
+    @hold_request.update(status: 'returned', return_date: DateTime.now, overdue_fine: bill)
     respond_to do |format|
-      format.html { redirect_to request.referrer, notice: 'Hold request was closed.' }
+      format.html { redirect_to @hold_request, notice: 'Book was returned.' }
       format.json { head :no_content }
     end
 

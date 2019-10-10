@@ -2,47 +2,49 @@
 
 <%= render 'book' %>
 <br>
-<table>
-  <tr>
-    <th colspan="5"> Borrow History </th>
-  </tr>
-  <tr>
-    <th>Request</th>
-    <th>Book id</th>
-    <th>Student id</th>
-    <th>Status</th>
-    <th>Checked Out Date</th>
-    <th>Return Date</th>
-  </tr>
-  <%  if !@requests.nil? then @requests.each do |request| %>
-  <tr>
-    <td><%= request.id %></td>
-    <td><%= request.book_id.to_s + '(' + request.copy.to_s + ')'  %></td>
-    <td><%= request.user_id %></td>
-    <td><%= case request.status
-            when 'checkout'
-              'Checked out'
-            when 'waitlist'
-              'In Wait List'
-            when 'approval'
-              'Requires Approval'
-            when 'returned'
-              'Returned'
-            else
-            end%></td>
-    <% if !request.checkout_date.nil? %>
-      <td><%= request.checkout_date.strftime('%m/%d/%Y') %></td>
-      <td><%= request.return_date.strftime('%m/%d/%Y') %></td>
-    <% else %>
-      <td></td>
-      <td></td>
+<% if @current_user.level != 'student' %>
+  <table>
+    <tr>
+      <th colspan="5"> Borrow History </th>
+    </tr>
+    <tr>
+      <th>Request</th>
+      <th>Book id</th>
+      <th>Student id</th>
+      <th>Status</th>
+      <th>Checked Out Date</th>
+      <th>Return Date</th>
+    </tr>
+    <%  if !@requests.nil? then @requests.each do |request| %>
+    <tr>
+      <td><%= request.id %></td>
+      <td><%= request.book_id.to_s + '(' + request.copy.to_s + ')'  %></td>
+      <td><%= request.user_id %></td>
+      <td><%= case request.status
+              when 'checkout'
+                'Checked out'
+              when 'waitlist'
+                'In Wait List'
+              when 'approval'
+                'Requires Approval'
+              when 'returned'
+                'Returned'
+              else
+              end%></td>
+      <% if !request.checkout_date.nil? %>
+        <td><%= request.checkout_date.strftime('%m/%d/%Y') %></td>
+        <td><%= request.return_date.strftime('%m/%d/%Y') %></td>
+      <% else %>
+        <td></td>
+        <td></td>
+      <%end %>
+    </tr>
     <%end %>
-  </tr>
-  <%end %>
-  <%end %>
+    <%end %>
 
 
-</table>
+  </table>
+<% end %>
 <br>
 
 <% unless  current_user.level == 'student' %>

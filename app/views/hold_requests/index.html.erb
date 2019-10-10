@@ -1,36 +1,63 @@
 <p id="notice"><%= notice %></p>
 <p id="alert" style="color:Tomato;"><%= alert %></p>
 
-<h2><%= @list.titleize %></h2>
+<% if @list == 'Overdue Students' %>
+  <%= render 'overdue'%>
+<%else %>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Folio</th>
-      <th>User id</th>
-      <th>Book title</th>
-      <th>Book author</th>
-      <th>Status</th>
-    </tr>
-  </thead>
+  <% if !@list.nil? %>
+    <h2><%= @list.titleize %></h2>
+  <% else %>
+    <h2>Requests</h2>
+  <% end %>
 
-  <tbody>
-    <% @hold_requests.each do |hold_request| %>
-      <% book = hold_request.get_book %>
+  <table>
+    <thead>
       <tr>
-        <td> <%= image_tag(book.cover, height: '45', width: '30') %> </td>
-        <td><%= hold_request.id %></td>
-        <td><%= hold_request.user_id %></td>
-        <td><%= book.title %></td>
-        <td><%= book.author %></td>
-        <td><%= hold_request.status %></td>
-        <td><%= link_to 'Details', hold_request %></td>
-        <td><%= link_to 'Return Book', hold_request, method: :delete, data: { confirm: 'Are you sure you want to return the book and close the request?' } %></td>
+        <th></th>
+        <th>Folio</th>
+        <th>User id</th>
+        <th>Book id</th>
+        <th>Book title</th>
+        <th>Book author</th>
+        <th>Status</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @hold_requests.each do |hold_request| %>
+        <% book = hold_request.get_book %>
+        <% if @current_user.level == 'librarian' %>
+          <% if hold_request.get_book.library_id != @current_user.library_id %>
+            <% next %>
+          <% end %>
+        <% end %>
+
+        <tr>
+          <td> <%= image_tag(book.cover, height: '45', width: '30') %> </td>
+          <td><%= hold_request.id %></td>
+          <td><%= hold_request.user_id %></td>
+          <td><%= hold_request.book_id.to_s + '(' + hold_request.copy.to_s + ')' %></td>
+          <td><%= book.title %></td>
+          <td><%= book.author %></td>
+          <td><%= hold_request.status=='waitlist' ? 'hold request' : hold_request.status %></td>
+          <td><% if @list == 'Approve Requests' %>
+            <td><%= link_to 'Approve', approve_path(:id => hold_request.id,:list => 'Approve Requests'), data:{ confirm: 'Confirm Approval?'} %></td>
+          <% end %></td>
+
+          <td><%= link_to 'Details', hold_request %></td>
+          <% if hold_request.status != 'returned' %>
+            <%if hold_request.status == 'waitlist' %>
+              <td><%= link_to 'Cancel Request', hold_request, method: :delete, data: { confirm: 'Are you sure you want to  close the request?' } %></td>
+              <% else %>
+              <td><%= link_to 'Return Book', hold_request, method: :delete, data: { confirm: 'Are you sure you want to return the book and close the request?' } %></td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%end %>
 
 <br>
 

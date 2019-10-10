@@ -13,23 +13,24 @@
       <%= link_to "Hold Requests", hold_requests_path(:list => 'Hold Requests') %> <br>
       <%= link_to "Special Collection Approval List", hold_requests_path(:list => 'Approve Requests') %> <br>
       <%= link_to "Checked Out Books", hold_requests_path(:list => 'Checked Out Books') %> <br>
-      <%= link_to "Students with Overdue Fines", :back %> <br>
+      <%= link_to "Students with Overdue Fines", hold_requests_path(:list => 'Overdue Students') %> <br>
       <%= link_to "Profile", user_path(@current_user) %> <br>
     <%when 'student' %>
 <!--      <%#= link_to "Users", books_path(university: current_user.university) %> <br>-->
       <%= link_to "Libraries", libraries_path %> <br>
       <%= link_to "Books", books_path %> <br>
-      <%= link_to "Hold Requests", hold_requests_path %> <br>
+      <%= link_to "Hold Requests", hold_requests_path(:list => 'Hold Requests') %> <br>
+      <%= link_to "Checked Out Books", hold_requests_path(:list => 'Checked Out Books') %> <br>
       <%= link_to "Profile", user_path(@current_user) %> <br>
     <%when 'librarian' %>
       <%= link_to "Profile", user_path(@current_user) %> <br>
       <% unless @current_user.library_id.nil? %>
         <%= link_to "Library", library_path(@current_user.library_id) %> <br>
         <%= link_to "Books", books_path %> <br>
-        <%= link_to "Hold Requests", hold_requests_path %> <br>
-        <%= link_to "Special Collection Approval List", hold_requests_path(:status => 'approval') %> <br>
-        <%= link_to "Checked Out Books", hold_requests_path(:status => 'checkout') %> <br>
-        <%= link_to "Students with Overdue Fines", :back %> <br>
+        <%= link_to "Hold Requests", hold_requests_path(:list => 'Hold Requests') %> <br>
+        <%= link_to "Special Collection Approval List", hold_requests_path(:list => 'Approve Requests') %> <br>
+        <%= link_to "Checked Out Books", hold_requests_path(:list => 'Checked Out Books') %> <br>
+        <%= link_to "Students with Overdue Fines", hold_requests_path(:list => 'Overdue Students') %> <br>
       <% end %>
 
     <%else %>

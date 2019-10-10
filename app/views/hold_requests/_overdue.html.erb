@@ -1,0 +1,55 @@
+<h2><%= @list.titleize %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>User id</th>
+      <th>Name</th>
+      <th>Book title</th>
+      <th>Book id</th>
+      <th>Request Folio</th>
+      <th>Status</th>
+      <th>Overdue Fine</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <% @hold_requests.each do |hold_request| %>
+        <% if @current_user.level == 'librarian' %>
+          <% if hold_request.get_book.library_id != @current_user.library_id %>
+              <% next %>
+          <% end %>
+        <% end %>
+
+        <% # Calculate the due amount to show it only
+           today = DateTime.now
+           bill = 0
+          if hold_request.status == 'checkout'
+           unless today.between?(hold_request.checkout_date, hold_request.return_date)
+             bill = (today - hold_request.return_date) * book.get_lib.overdue_fines
+           end
+          end%>
+
+        <% if user.id == hold_request.user_id && (hold_request.overdue_fine > 0 || bill>0) %>
+          <% book = hold_request.get_book %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.name %></td>
+            <td><%= book.title %></td>
+            <td><%= hold_request.book_id.to_s + '(' + hold_request.copy.to_s + ')' %></td>
+            <td><%= hold_request.id %></td>
+            <td><%= hold_request.status %></td>
+            <% if hold_request.status == 'checkout' %>
+              <td><%= bill %></td>
+            <% else %>
+              <td><%= hold_request.overdue_fine %></td>
+            <% end %>
+          </tr>
+
+        <% end %>
+
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

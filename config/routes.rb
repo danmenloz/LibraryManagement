@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   # Normal route
   # get 'books' => 'books#index'
+  get 'approve', to: 'hold_requests#approve'
+
   get 'home', to: 'sessions#show', as: 'home'
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'

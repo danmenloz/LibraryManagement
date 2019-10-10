@@ -25,13 +25,13 @@
     <th>ISBN</th>
     <th>Title</th>
     <th>Author(s)</th>
-    <th>Language</th>
     <th>Published</th>
-    <th>Edition</th>
+    <th>Available</th>
     <th>Cover</th>
     <th>Subject</th>
     <th>Library</th>
     <th>Special Collection</th>
+    <th>Hold Requests</th>
     <th></th>
     <th></th>
     <th></th>
@@ -42,13 +42,13 @@
           <td><%= book.isbn %></td>
           <td><%= book.title %></td>
           <td><%= book.author %></td>
-          <td><%= book.language%></td>
           <td><%= book.published.strftime('%m/%d/%Y') %></td>
-          <td><%= book.edition%></td>
+          <td><%= book.copies%></td>
           <td><%= image_tag(book.cover, height: '70', width: '50') %></td>
           <td><%= book.subject%></td>
           <td><%= book.library.name + '-' + book.library.university %></td>
           <td><%= book.special ? 'Yes' : 'No'%></td>
+          <td><%= HoldRequest.where(book_id: book.id ,status: 'waitlist').count %></td>
         <%if  @current_user.level != 'student' %>
           <% if @current_user.level == 'admin' %>
             <td><%= link_to 'Request',new_hold_request_path(:user_id => @current_user.id,
