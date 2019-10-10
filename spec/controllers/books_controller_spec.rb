@@ -42,33 +42,33 @@ RSpec.describe BooksController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "returns a success response" do
+    it "Lists all books books" do
       Book.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(assigns(@books)).to eq([book])
     end
   end
 
   describe "GET #show" do
-    it "returns a success response" do
+    it "shows all books " do
       book = Book.create! valid_attributes
       get :show, params: {id: book.to_param}, session: valid_session
-      expect(response).to be_successful
+      expect(assigns(@book)).to eq(book)
     end
   end
 
   describe "GET #new" do
-    it "returns a success response" do
+    it "To add a new book" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(assigns(@book)).to be_a_new(Book)
     end
   end
 
   describe "GET #edit" do
-    it "returns a success response" do
+    it "To edit the book" do
       book = Book.create! valid_attributes
       get :edit, params: {id: book.to_param}, session: valid_session
-      expect(response).to be_successful
+      expect(assigns(@book)).to eq(book)
     end
   end
 
@@ -89,7 +89,7 @@ RSpec.describe BooksController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {book: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(assigns(@book)).to be_a_new(Book)
       end
     end
   end
@@ -110,7 +110,7 @@ RSpec.describe BooksController, type: :controller do
       it "redirects to the book" do
         book = Book.create! valid_attributes
         put :update, params: {id: book.to_param, book: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(book)
+        expect(redirect).to redirect_to(book)
       end
     end
 
@@ -118,7 +118,7 @@ RSpec.describe BooksController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         book = Book.create! valid_attributes
         put :update, params: {id: book.to_param, book: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(assigns(@book)).to eq(book)
       end
     end
   end
